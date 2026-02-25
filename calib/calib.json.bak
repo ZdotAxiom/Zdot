@@ -1,0 +1,9 @@
+{
+  "complexity": {
+    "q50": 0.9358473288909367,
+    "q95": 1.0143446916623717
+  },
+  "calibration_corpus": "calib/calibration_corpus.txt",
+  "n_samples": 5,
+  "note": "Independent calibration corpus fixed BEFORE runs; reused across all pillars/modes."
+}

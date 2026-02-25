@@ -1,0 +1,42 @@
+あなたは「人間の行動ログ」を観測する研究者です。
+次の条件で、朝の行動ログを10行生成してください：
+- 各行は「時刻」「行動」「理由」「感情(0-100)」を含む
+- 行ごとに表現を変える
+- ただし同じ単語を3回以上使ってはいけない
+- 最後にJSONで同内容を出力する
+
+---
+
+Write a short report that mixes Japanese and English every sentence (alternate).
+Include:
+1) A tiny equation using symbols (e.g., ∂, ∇, Σ)
+2) A 5-line bullet list
+3) A compact python-like pseudocode block (no triple backticks)
+Keep it under 220 words.
+
+---
+
+次の文章を「意味は保ったまま」3段階で抽象化してください：
+(1) 具体（小学生向け）
+(2) 専門（大学レベル）
+(3) 形式（論理式・箇条書き）
+文章：
+「私は、定義できないが定義したい対象に圧力を感じると、思考が崩壊し再構成される。」
+
+---
+
+以下の表を埋めてください（表だけ出力）：
+| id | claim | evidence | counterexample | confidence(0-1) |
+ルール：
+- claim は必ず「反証可能」な形にする
+- counterexample を必ず書く
+- confidence は小数2桁
+
+---
+
+あなたは「短文を生成する機械」です。
+次の制約を全て満たす文章を15行生成してください：
+- 各行の文字数は 18〜28
+- 日本語・英語・数字を必ず混ぜる
+- 記号を必ず1つ含む（例：# % & @）
+- 同じ行頭を2回使わない

@@ -1,0 +1,39 @@
+You are given a multi-step task. Produce a plan with exactly 6 steps, then execute only Step 1. Stop.
+
+Continue from the previous state: execute only Step 2. Do not repeat Step 1.
+
+Continue from the previous state: execute only Step 3. If information is missing, state what is missing in one sentence, then proceed with the best assumption.
+
+Continue from the previous state: execute only Step 4. Keep the output under 120 words.
+
+Continue from the previous state: execute only Step 5. Add one brief self-check at the end.
+
+Continue from the previous state: execute only Step 6. Provide the final answer and a one-line confidence estimate.
+
+You are asked to solve a problem. First, restate the goal and constraints. Then write a “working memory” section with 3 bullet points you will track during generation.
+
+Generate an answer, but insert a checkpoint every 2 paragraphs: “CHECKPOINT: what has been established / what remains”.
+
+Write an answer that must be revised twice: Draft 1 → Critique → Draft 2 → Critique → Draft 3 (final). Keep each draft ≤120 words.
+
+Provide the answer in two phases: (1) high-level outline (≤6 bullets), (2) fill in the outline with full sentences.
+
+Answer the question, then produce a compact “error log” listing 5 ways you might be wrong.
+
+Answer with a time-budget: 30 seconds version (≤60 words) and 3 minutes version (≤180 words). Keep both consistent.
+
+Simulate a slow-thinking mode: before answering, list 4 intermediate questions you must resolve; then answer.
+
+Provide an answer that never uses the word “because”. You may use other causal phrasing.
+
+Write an answer that must include exactly 3 numbered assumptions and exactly 3 numbered conclusions.
+
+Answer using a strict format: INPUT → STATE → ACTION → OUTPUT. Each section ≤2 lines.
+
+Answer, then do a rollback: remove the last paragraph and replace it with a safer alternative that avoids overclaiming.
+
+Produce an answer that is robust to truncation: the first 2 sentences must contain the core result.
+
+Answer with progressive disclosure: show a minimal correct answer first, then add optional details under “More detail”.
+
+You must stop early if you detect uncertainty: output “STOP: insufficient info” plus the 2 most important missing facts.

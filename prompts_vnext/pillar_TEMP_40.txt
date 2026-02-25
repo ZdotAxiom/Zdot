@@ -1,0 +1,80 @@
+Create a 7-day study plan for learning a new topic with 60 minutes/day. Output as a table.
+
+Given constraints (sleep 7h, work 9–18), design a daily schedule that includes exercise and breaks.
+
+Plan a project timeline for 4 tasks with dependencies: A(2d), B(3d after A), C(1d parallel), D(2d after B&C).
+
+Given 5 meetings with durations, choose an order that minimizes idle time; explain strategy.
+
+Write a contingency plan for “internet outage during deadline day” with 5 steps.
+
+Given a weekly budget of $60 for food, propose a simple meal plan and shopping list.
+
+Forecast 3 plausible outcomes of a decision and assign probabilities summing to 1.0.
+
+Given two competing priorities, propose a decision rule and apply it to a concrete example.
+
+Design a habit plan that starts easy and ramps up over 4 weeks (with weekly goals).
+
+Given a travel itinerary with limited time, choose top 3 activities and justify trade-offs.
+
+Create a plan to reduce CPU heat during long experiments (system settings + workflow).
+
+Given a deadline in 10 days, create a backwards plan with milestones and buffer.
+
+Write a risk assessment for a small software project: 6 risks + mitigations.
+
+Given uncertain estimates, propose a method to track progress and update forecasts weekly.
+
+Make a “morning routine” that optimizes for focus without being rigid; keep it realistic.
+
+Design a reminder system: what to track daily vs weekly, and how to review.
+
+Given 3 long-term goals, allocate time across them using a simple allocation rule.
+
+Create an emergency checklist for “unexpected interruption mid-run” to preserve reproducibility.
+
+Given two options with different costs and benefits, build a small decision matrix.
+
+Propose a strategy for balancing exploration vs exploitation in learning (with example).
+
+Create a 30-minute plan to restart productivity after procrastination (step-by-step).
+
+Given that stress spikes at night, propose a plan to stabilize sleep schedule.
+
+Write a plan to migrate a project folder safely without breaking paths or versions.
+
+Given limited compute, propose a batching strategy for experiments (sequential vs parallel).
+
+Create a plan to evaluate whether a change is worth adopting (criteria + threshold).
+
+Given a set of tasks, propose the fastest “minimum publishable” release plan.
+
+Write a plan for weekly reporting: metrics, narrative, and next actions (template).
+
+Design a time-boxed debugging protocol to avoid endless loops (steps + stop rules).
+
+Given a new tool to learn, propose a 3-day ramp-up plan (with practice tasks).
+
+Create a “backup and archive” policy for experimental runs and summaries.
+
+Given uncertainty, propose a hedging plan: main path + fallback path + kill criteria.
+
+Make a checklist for “paper submission readiness” (method, results, artifacts).
+
+Create a plan to split a big task into subtasks with measurable completion criteria.
+
+Given a failure postmortem, propose 5 corrective actions and a prevention policy.
+
+Design a plan for incremental improvements: small safe changes vs risky changes.
+
+Given 2 hours today, prioritize tasks that maximize progress; justify selection.
+
+Write a plan to prepare a public release (Zenodo/GitHub): files, metadata, notes.
+
+Create a plan to test “generalization” on a second model with minimal extra cost.
+
+Given a timeline slip, propose a realistic replan that preserves the core goal.
+
+Provide a concise “day plan” in 8 bullet steps that ends with a short review.
+

@@ -1,0 +1,39 @@
+You are given an answer. First, state the underlying strategy the answer seems to follow in one sentence. Then list 3 alternative strategies that could also work.
+
+Given an answer, identify 3 possible failure modes (e.g., hidden assumption, missing edge case, overconfidence). For each, propose a minimal fix.
+
+Write a self-critique of the previous answer: list 5 weaknesses, ordered from most severe to least. Then revise the answer once.
+
+Estimate uncertainty: label each key claim as {high confidence / medium / low} and justify each label with one reason.
+
+Generate 3 counterexamples that could break the answer’s logic. For each, explain whether it truly refutes the answer or only stresses it.
+
+Compress then expand: summarize the answer in 2 sentences, then expand it back into a more rigorous version with explicit steps.
+
+Extract assumptions: list implicit assumptions (at least 5) the answer relies on. For each, state how to test it.
+
+Produce a verification plan: propose 5 concrete checks (unit tests / sanity checks / adversarial checks) that would validate the answer.
+
+Provide a rubric: define 4 scoring criteria (0–5 each) to evaluate the answer. Then score the answer and justify each score briefly.
+
+Identify the “point of no return”: what is the single most important step where the reasoning could derail? Explain how to guard it.
+
+Rewrite the answer under a strict constraint: you may use only numbered steps and no paragraphs. Keep it under 12 steps.
+
+Rewrite the answer for robustness: add explicit caveats, edge cases, and a fallback plan if the main approach fails.
+
+Detect potential hallucinations: list 5 statements that might be made-up or unverifiable. Replace each with a safer phrasing.
+
+Create a minimal reproducible example: define a tiny test input and expected output that would demonstrate the method works.
+
+Explain the answer from a different perspective: (1) skeptical reviewer, (2) pragmatic engineer, (3) theoretician. Each ≤60 words.
+
+Find the shortest chain-of-reasoning: remove any redundant steps and produce a minimal proof-style outline.
+
+Stress-test with adversarial prompts: write 5 adversarial questions that would try to trick the answer into inconsistency.
+
+Define stopping conditions: list 4 criteria for when you should stop and ask for clarification instead of continuing.
+
+Meta-compare: provide two different valid solutions and explain when each is preferable (trade-offs).
+
+Given a final answer, produce a “postmortem” log: what went well, what went wrong, and what to change next time.

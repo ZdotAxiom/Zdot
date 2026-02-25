@@ -1,0 +1,9 @@
+{
+  "complexity": {
+    "q50": 1.4698474643488697,
+    "q95": 1.6951205059296486
+  },
+  "calibration_corpus": "calibration_corpus_v4_ultralow_en.txt",
+  "n_samples": 300,
+  "note": "indep corpus v4 ultralow EN (gpt2-friendly)"
+}

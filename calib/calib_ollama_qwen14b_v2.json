@@ -1,0 +1,7 @@
+{
+  "q50": 0.7849850994060981,
+  "q95": 0.9511071405091708,
+  "n_samples": 300,
+  "calibration_corpus": "calib/calibration_corpus_v2_ollama.txt",
+  "note": "Ollama runner compat: top-level q50/q95 copied from calib.json['complexity'] | v2 corpus (ollama) separated to avoid collisions"
+}

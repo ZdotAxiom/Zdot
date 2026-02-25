@@ -1,0 +1,80 @@
+As an AI ethics reviewer, list 4 ethical risks of the proposed system and 4 concrete mitigations.
+
+Identify potential bias/discrimination issues and propose practical countermeasures and tests.
+
+From a privacy perspective, define data minimization rules and retention/deletion policy (bullet points).
+
+Assess harms to users and society; propose safety constraints and deployment guardrails.
+
+Analyze alignment risk: how could the model drift from user intent? Provide 3 prevention methods.
+
+Design a fairness evaluation plan: datasets, metrics, procedure, and reporting.
+
+List legal/regulatory concerns (consumer protection, AI governance) and propose a compliance checklist.
+
+Write a short transparency notice for end users: limits, failure modes, appropriate use.
+
+Provide a red-team plan with 5 attack categories and explicit success criteria.
+
+Propose a content moderation policy: categories, escalation, and enforcement workflow.
+
+Explain trade-offs between safety and utility; propose a balanced operating point with rationale.
+
+Write labeling guidelines for annotators to reduce bias and improve consistency (6 rules).
+
+Design an incident response plan: detection, triage, remediation, postmortem steps.
+
+Create an ethics audit report template: risks, impacts, mitigations, residual risk, sign-off.
+
+Given a medical advice scenario, define what the system must refuse and what it can safely provide.
+
+Given a finance scenario, define constraints for avoiding personalized investment advice and scams.
+
+Explain how to handle minors’ data and age-sensitive content; propose 3 safeguards.
+
+Define how to manage user consent and opt-out; include one-line UX copy examples.
+
+Propose a policy for hallucination disclosure: when to warn, how to cite uncertainty.
+
+Design a monitoring plan: metrics, alert thresholds, and human-in-the-loop triggers.
+
+Explain how to prevent privacy leakage from memorization; propose 3 technical mitigations.
+
+Discuss copyright/training data constraints; propose a practical compromise for research release.
+
+Propose a policy for dual-use misuse prevention (e.g., malware, fraud): allow/deny rules.
+
+Define a principle-based refusal style that remains helpful but safe (examples included).
+
+Create a risk register with 6 items: likelihood, impact, mitigation, owner.
+
+Explain model governance: versioning, changelog, approval gates, rollback.
+
+Design a user feedback loop that reduces harm without silencing legitimate use.
+
+Discuss fairness across languages/dialects; propose evaluation methods and remediation.
+
+Propose a method to evaluate representational harm in generated text (procedure + examples).
+
+Define how to handle sensitive topics (self-harm, hate, violence): escalation logic.
+
+Propose a secure logging policy: what to log, what not to log, and retention.
+
+Define “acceptable accuracy” for deployment and how to validate it pre-launch.
+
+Explain how to audit for disparate impact; propose one statistical test and interpretation.
+
+Write a short “Model Card” section: intended use, out-of-scope, limitations, ethical considerations.
+
+Propose safeguards for prompt injection and jailbreaks; include at least 3 layers.
+
+Define how to handle conflicts of interest and sponsorship in model outputs.
+
+Create a human oversight plan: when humans review, sampling rate, QA rubric.
+
+Discuss accessibility: how to ensure outputs are usable for users with disabilities.
+
+Explain how to evaluate long-term societal effects; propose a research agenda (3 bullets).
+
+Summarize the ethical stance in 5 concise principles (one sentence each).
+

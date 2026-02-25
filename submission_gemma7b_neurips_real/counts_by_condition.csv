@@ -1,0 +1,11 @@
+pillar,mode,n_runs,ok_expect
+ETH,baseline,500,1
+ETH,controlled,500,1
+HUM,baseline,500,1
+HUM,controlled,500,1
+META,baseline,500,1
+META,controlled,500,1
+STEM,baseline,500,1
+STEM,controlled,500,1
+TEMP,baseline,500,1
+TEMP,controlled,500,1

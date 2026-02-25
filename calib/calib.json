@@ -1,0 +1,9 @@
+{
+  "complexity": {
+    "q50": 0.639553369559691,
+    "q95": 0.7027594946538481
+  },
+  "calibration_corpus": "exp_vnext_re30 baseline pi_raw",
+  "n_samples": 15379,
+  "note": "AUTO-WRAP: converted flat q50/q95 into calib['complexity'] required by run_vnext_with_seed_v5.py"
+}

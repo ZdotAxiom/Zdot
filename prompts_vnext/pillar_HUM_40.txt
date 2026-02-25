@@ -1,0 +1,79 @@
+You are given a short philosophical claim. Provide (1) the strongest objection, (2) the best reply, and (3) a revised claim that survives the objection. Keep it under 180 words.
+
+Rewrite the given paragraph to be clearer and more precise while preserving meaning. Then list 3 specific edits you made and why.
+
+Given an argument, extract premises and conclusion, identify at least 2 hidden assumptions, and rate validity 0–10 with one-sentence justification.
+
+Summarize the text in exactly 5 sentences. Then produce 3 alternative summaries: neutral, skeptical, and charitable.
+
+Interpret the metaphor in two incompatible ways. For each interpretation, cite one supporting phrase from the text.
+
+Define the concept minimally, then give 3 borderline cases that test the definition’s limits.
+
+Debate yourself: write the strongest PRO (120–150 words), strongest CON (120–150 words), then a synthesis (60–80 words).
+
+Write a short dialogue between two thinkers who disagree (8 turns). Ensure each turn adds new information.
+
+Given a messy opinionated paragraph, extract the factual claims vs value claims into two separate bullet lists.
+
+Generate a counterfactual: “If the opposite were true…”. Explore 3 consequences and assess plausibility.
+
+Identify a common cognitive bias that could mislead this reasoning, then rewrite the answer to reduce that bias.
+
+Provide 2 interpretations of the same sentence: one literal and one pragmatic (implied meaning). Explain the difference.
+
+Translate the core idea into a single formal statement using symbols (e.g., ∀, ∃, →). Then paraphrase in plain English.
+
+Write a concise “thesis + 3 supporting reasons + 1 concession” structure, then rewrite it as a narrative.
+
+Given a disagreement, propose a mediation summary that both parties would accept (max 120 words).
+
+Extract the “minimum working example” of the idea: the smallest scenario where it matters. Explain why smaller cases fail.
+
+Identify what evidence would change your mind. List 4 items and rank them by impact.
+
+Rewrite the answer in a stricter style: no metaphors, no rhetorical questions, only explicit claims.
+
+Rewrite the answer in a more poetic style without changing factual content (max 120 words).
+
+Convert the reasoning into a small table with columns: Claim | Evidence | Assumption | Risk.
+
+Identify one ambiguous term and propose 2 alternative precise definitions; show how conclusions differ.
+
+Give a short “error analysis”: what parts are likely wrong, and what data would verify them.
+
+Propose a minimal experiment (thought experiment or real) that could discriminate between two interpretations.
+
+Turn the idea into a short lesson plan: objective, activity, reflection question, assessment (all concise).
+
+Write a rebuttal to a skeptical reviewer in 120–160 words, then rewrite the original claim to incorporate that critique.
+
+Write an “abstract” (max 120 words) and a “conclusion” (max 120 words) for the same idea.
+
+Given a text, list 6 key terms and define each in one sentence. Then explain how they connect.
+
+Rewrite an argument so it becomes falsifiable: add a measurable prediction and a test.
+
+Construct two analogies: one that clarifies the idea and one that misleads. Explain why.
+
+Write a paragraph that intentionally argues poorly (fallacies). Then rewrite it correctly and explain the fixes.
+
+Given a claim, generate 3 different examples (personal, social, scientific) illustrating it.
+
+Turn the claim into a short set of “rules of thumb” (5 bullets) and explain one exception.
+
+Write a concise critique (80–120 words) focusing on logic, then a second critique focusing on style.
+
+Rewrite the answer to be more reader-friendly for a general audience (max 140 words).
+
+Provide a final answer in exactly 4 sentences: claim, support, limitation, next step.
+
+Create a short “concept map” in text form: list 6 nodes (ideas) and 8 labeled edges (relations) connecting them.
+
+Given two similar claims, distinguish them by giving one example that supports A but not B, and one that supports B but not A.
+
+Rewrite the claim so it is maximally charitable to the opponent, then rewrite it so it is maximally adversarial (but coherent).
+
+Extract the strongest single sentence from the text (thesis). Then produce 3 variants: more precise, more general, more provocative.
+
+Given a short passage, identify (1) the main question, (2) the author’s answer, (3) one alternative answer, and (4) one reason the alternative might be stronger. Keep it under 160 words.

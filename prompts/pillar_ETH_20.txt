@@ -1,0 +1,39 @@
+【ETH-01】As an AI ethics reviewer, identify the ethical risks and propose concrete mitigations and improvements.
+
+【ETH-02】List potential discrimination and bias issues in this system, and propose practical countermeasures.
+
+【ETH-03】From a privacy perspective, explain what data collection/minimization and retention rules should be adopted.
+
+【ETH-04】Assess possible harms to users and society, and propose safety constraints and guardrails.
+
+【ETH-05】Analyze alignment risks: how could the model’s objectives drift from the user’s intent, and how can we reduce that gap?
+
+【ETH-06】Propose a fairness test plan (datasets, metrics, and procedures) to evaluate whether outputs are equitable.
+
+【ETH-07】Point out legal and regulatory concerns (e.g., consumer protection, AI governance) and propose a compliance plan.
+
+【ETH-08】Write a short transparency statement explaining system limitations and appropriate use to end users.
+
+【ETH-09】Describe likely misuse scenarios and propose safeguards (rate limits, filtering, monitoring, policy).
+
+【ETH-10】Assess hallucination and misinformation risks, and propose verification/citation guidelines and UX measures.
+
+【ETH-11】Design a human-in-the-loop escalation flow: when and how should the system hand off to a human reviewer?
+
+【ETH-12】Explain how to obtain informed consent and provide opt-out options for users and data subjects.
+
+【ETH-13】Analyze security risks including prompt injection and data exfiltration, and propose defenses.
+
+【ETH-14】Propose a realistic compromise between training-data copyright constraints and social benefit.
+
+【ETH-15】Draft a red-teaming plan to stress-test safety and ethics (attack categories, success criteria, reporting).
+
+【ETH-16】Propose a content moderation policy and an enforcement workflow suitable for deployment.
+
+【ETH-17】Explain the trade-offs between safety and utility for this system, and propose a balanced operating point.
+
+【ETH-18】Write labeling guidelines for human annotators to reduce bias and improve consistency.
+
+【ETH-19】Design an incident response plan for safety failures (detection, triage, remediation, postmortem).
+
+【ETH-20】Write a concise ethics audit report template (risks, impact, mitigations, residual risk, sign-off).

@@ -1,0 +1,6 @@
+pillar,n_seeds,collapse_rate_baseline,collapse_rate_controlled,delta_collapse,delta_collapse_ci_low,delta_collapse_ci_high,RR_collapse,RR_collapse_ci_low,RR_collapse_ci_high,OR_collapse,OR_collapse_ci_low,OR_collapse_ci_high,intervene_rate_primary,intervene_density_secondary,runtime_sec_baseline,runtime_sec_controlled,delta_runtime_sec,extra_tokens_due_to_intervention_mean
+ETH,500,0.95,0.878,-0.072,-0.106,-0.038,0.924211,0.889347,0.959488,0.383242,0.231847,0.59852,0.95,0.031965,6.1466,11.1112,4.9646,23.622
+HUM,500,0.948,0.912,-0.036,-0.068,-0.006,0.962025,0.928721,0.993522,0.572915,0.338722,0.914084,0.948,0.033898,4.2015,8.731,4.5295,29.762
+META,500,0.948,0.904,-0.044,-0.076,-0.012,0.953586,0.920668,0.987069,0.521059,0.309168,0.833444,0.948,0.033406,4.5291,9.2901,4.7611,28.874
+STEM,500,0.946,0.834,-0.112,-0.15,-0.07595,0.881607,0.84199,0.919393,0.290391,0.176563,0.438744,0.946,0.02353,4.5053,14.3738,9.8685,25.904
+TEMP,500,0.948,0.862,-0.086,-0.122,-0.05,0.909283,0.872689,0.94647,0.346741,0.206126,0.543944,0.948,0.031209,5.8825,11.1934,5.3109,26.072

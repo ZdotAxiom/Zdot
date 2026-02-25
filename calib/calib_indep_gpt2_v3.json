@@ -1,0 +1,9 @@
+{
+  "complexity": {
+    "q50": 0.7511593641427962,
+    "q95": 0.9885948158179998
+  },
+  "calibration_corpus": "calibration_corpus_v3.txt",
+  "n_samples": 300,
+  "note": "indep corpus v3 -> q50/q95 (gpt2)"
+}

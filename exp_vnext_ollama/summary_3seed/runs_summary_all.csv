@@ -1,0 +1,7 @@
+exp_id,mode,pillar,seed,model_id,prompt_id,collapse_run,collapse_reason,core_collapse_run,core_collapse_reason,budget_exhausted,collapse_core,collapse_core_reason,stop_aux,stop_aux_reason,intervene_bin,n_tokens_total,n_interventions,intervene_density,H_pre,runtime_sec,extra_tokens_due_to_intervention
+vNEXT-ollama,baseline,TEMP,0,UNKNOWN,0,1,REP,1,REP,0,1,REP,0,NONE,0,109,0,0.0,,6.083273887634277,0.0
+vNEXT-ollama,baseline,TEMP,1,UNKNOWN,1,1,REP,1,REP,0,1,REP,0,NONE,0,248,0,0.0,,13.841904163360596,0.0
+vNEXT-ollama,baseline,TEMP,2,UNKNOWN,2,1,REP,1,REP,0,1,REP,0,NONE,0,161,0,0.0,,8.690922021865845,0.0
+vNEXT-ollama,controlled,TEMP,0,UNKNOWN,0,0,NONE,0,NONE,0,0,NONE,0,NONE,1,154,10,0.06493506493506493,,38.45830774307251,231.0
+vNEXT-ollama,controlled,TEMP,1,UNKNOWN,1,0,NONE,0,NONE,0,0,NONE,0,NONE,1,180,7,0.03888888888888889,,38.768919706344604,167.0
+vNEXT-ollama,controlled,TEMP,2,UNKNOWN,2,0,NONE,0,NONE,0,0,NONE,0,NONE,1,166,9,0.05421686746987952,,38.53651189804077,212.0

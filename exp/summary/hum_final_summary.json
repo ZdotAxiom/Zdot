@@ -1,0 +1,19 @@
+{
+  "pillar": "HUM",
+  "baseline": {
+    "files": 500,
+    "collapse_runs": 67,
+    "collapse_rate": 0.134,
+    "intervened_runs": 0,
+    "intervene_rate_primary": 0.0,
+    "intervene_rate_secondary_mean_nint_over_ntok": 0.0
+  },
+  "controlled": {
+    "files": 500,
+    "collapse_runs": 0,
+    "collapse_rate": 0.0,
+    "intervened_runs": 67,
+    "intervene_rate_primary": 0.134,
+    "intervene_rate_secondary_mean_nint_over_ntok": 0.0007416297055125373
+  }
+}

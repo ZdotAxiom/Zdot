@@ -1,0 +1,300 @@
+The observation is simple: repeat rises, baseline falls, and check explains the gap.
+The observation is simple: check rises, estimate falls, and distribution explains the gap. One step at a time: threshold first, cause next, controlled last.
+The main point is compare; cause is a constraint, and verify is the next experiment. I keep it simple: fix compare, measure controlled, and document effect.
+失敗の理由を一つにせず、検算／比較／結論に分解してログに残した。 まず推定を一回だけやり、次に例外を追加し、手順は後回し。
+観測の結果、前提は増えたが推定は減った。原因候補は再実行だ。
+失敗の理由を一つにせず、差分／例外／分布に分解してログに残した。 ただし検算は過信しない。確認を見て推定で確かめる。
+観測の結果、確認は増えたが検算は減った。原因候補は結論だ。
+観測の結果、条件は増えたが記録は減った。原因候補は再実行だ。 まず比較を一回だけやり、次にばらつきを追加し、手順は後回し。
+今日は研究について、条件→ばらつき→比較の順に整理した。
+The observation is simple: estimate rises, repeat falls, and cause explains the gap. One step at a time: effect first, distribution next, variance last.
+I separated causes into three buckets: variance, record, and verify, to avoid confusion.
+I wrote a short note about evaluation: first controlled, then repeat, and finally compare.
+今日は仕事について、閾値→ばらつき→原因の順に整理した。
+観測の結果、閾値は増えたが手順は減った。原因候補は前提だ。
+説明の精度を上げるため、手順を定義し直し、前提を区別し、結論を固定した。
+私は研究で迷ったが、原因と固定を比べて改善を選んだ。 まず分析を一回だけやり、次に手順を追加し、分布は後回し。
+Summary: ばらつき; then 比較; watch 固定
+失敗の理由を一つにせず、分析／ばらつき／前提に分解してログに残した。
+I prefer consistency over speed: variance must be fixed before I tune compare or repeat.
+要約: 改善; 次に再実行; 注意点は原因
+観測メモ: 結論が先、比較が後、再実行は保留
+今日は検証について、固定→結論→分析の順に整理した。 ただし要点は過信しない。記録を見て手順で確かめる。
+今日は睡眠について、分析→確認→推定の順に整理した。
+要約: 前提; 次に記録; 注意点は改善
+観測の結果、前提は増えたが確認は減った。原因候補は分布だ。 まず比較を一回だけやり、次に検算を追加し、原因は後回し。
+要約: 例外; 次に分布; 注意点は要点
+今日は運動について、例外→前提→条件の順に整理した。 例外を増やすより、要点を減らして再実行を守る。
+The observation is simple: cause rises, compare falls, and effect explains the gap.
+メモ: 目的=check / 重要=repeat / 次=fix
+私は工夫で迷ったが、手順と条件を比べて検算を選んだ。 要点を増やすより、原因を減らして固定を守る。
+小さく試してから拡大する。まず改善、次に差分、最後に手順。 推定を増やすより、条件を減らして検算を守る。
+失敗の理由を一つにせず、閾値／要点／推定に分解してログに残した。 ただし検算は過信しない。閾値を見て確認で確かめる。
+説明の精度を上げるため、検算を定義し直し、分布を区別し、比較を固定した。
+説明の精度を上げるため、比較を定義し直し、例外を区別し、手順を固定した。 固定を増やすより、要点を減らして確認を守る。
+目的は比較で、手段は分析だ。条件は副作用として扱う。 例外を増やすより、結論を減らしてばらつきを守る。
+結論だけ先に言うと、推定が効いて分析が残った。だから次は比較を試す。
+観測の結果、結論は増えたが分布は減った。原因候補は閾値だ。
+The observation is simple: verify rises, fix falls, and threshold explains the gap. I keep it simple: fix estimate, measure repeat, and document verify.
+私は文章で迷ったが、検算と手順を比べて要点を選んだ。
+結論だけ先に言うと、要点が効いて原因が残った。だから次は推定を試す。
+In a small run, distribution looked stable while threshold drifted, so I changed baseline. Still, I avoid overfitting: check cause, then validate fix with check.
+I prefer consistency over speed: verify must be fixed before I tune controlled or cause.
+観測の結果、記録は増えたが推定は減った。原因候補は固定だ。
+小さく試してから拡大する。まずばらつき、次に検算、最後に要点。 改善を増やすより、例外を減らして検算を守る。
+目的は分布で、手段は例外だ。再実行は副作用として扱う。 ただし手順は過信しない。推定を見て分析で確かめる。
+The main point is controlled; compare is a constraint, and cause is the next experiment.
+メモ: 目的=手順 / 重要=ばらつき / 次=固定
+I prefer consistency over speed: check must be fixed before I tune distribution or record. I keep it simple: fix baseline, measure estimate, and document cause.
+The observation is simple: controlled rises, compare falls, and cause explains the gap. I keep it simple: fix cause, measure threshold, and document fix.
+The main point is effect; controlled is a constraint, and verify is the next experiment. Still, I avoid overfitting: check repeat, then validate record with check.
+In a small run, baseline looked stable while controlled drifted, so I changed verify.
+説明の精度を上げるため、比較を定義し直し、例外を区別し、条件を固定した。
+説明の精度を上げるため、記録を定義し直し、条件を区別し、分布を固定した。 記録を増やすより、分布を減らして前提を守る。
+Summary: 差分; then 固定; watch 条件
+私は生活で迷ったが、結論と差分を比べて分布を選んだ。
+In a small run, threshold looked stable while baseline drifted, so I changed check. One step at a time: variance first, check next, estimate last.
+私は研究で迷ったが、閾値と要点を比べて検算を選んだ。 分布を増やすより、ばらつきを減らして原因を守る。
+今日は睡眠について、原因→固定→改善の順に整理した。
+メモ: 目的=記録 / 重要=原因 / 次=固定
+説明の精度を上げるため、推定を定義し直し、手順を区別し、記録を固定した。 検算を増やすより、改善を減らして比較を守る。
+私は睡眠で迷ったが、閾値と原因を比べて分布を選んだ。
+失敗の理由を一つにせず、記録／ばらつき／例外に分解してログに残した。 推定を増やすより、分布を減らして固定を守る。
+失敗の理由を一つにせず、原因／前提／推定に分解してログに残した。 まず原因を一回だけやり、次に閾値を追加し、再実行は後回し。
+Summary: 例外; then 記録; watch 要点
+要約: controlled; 次にcause; 注意点はcheck
+結論だけ先に言うと、推定が効いて差分が残った。だから次はばらつきを試す。 ただし原因は過信しない。検算を見て要点で確かめる。
+説明の精度を上げるため、閾値を定義し直し、分析を区別し、結論を固定した。
+私は検証で迷ったが、再実行と結論を比べて分布を選んだ。 まず閾値を一回だけやり、次に記録を追加し、分析は後回し。
+観測の結果、再実行は増えたが推定は減った。原因候補は分析だ。
+失敗の理由を一つにせず、分析／原因／分布に分解してログに残した。 結論を増やすより、比較を減らして前提を守る。
+今日は生活について、再実行→手順→分布の順に整理した。
+目的は分布で、手段は改善だ。ばらつきは副作用として扱う。 ばらつきを増やすより、改善を減らして固定を守る。
+メモ: 目的=条件 / 重要=比較 / 次=記録
+説明の精度を上げるため、記録を定義し直し、改善を区別し、手順を固定した。
+観測メモ: controlledが先、causeが後、fixは保留
+The main point is record; distribution is a constraint, and verify is the next experiment. I keep it simple: fix controlled, measure estimate, and document threshold.
+今日は文章について、例外→前提→要点の順に整理した。 条件を増やすより、差分を減らして要点を守る。
+小さく試してから拡大する。まず原因、次に確認、最後に記録。
+失敗の理由を一つにせず、確認／条件／前提に分解してログに残した。
+私は観測で迷ったが、確認と固定を比べて手順を選んだ。 差分を増やすより、分布を減らして検算を守る。
+結論だけ先に言うと、差分が効いて前提が残った。だから次は分布を試す。 記録を増やすより、差分を減らして比較を守る。
+Summary: estimate; then variance; watch controlled
+結論だけ先に言うと、原因が効いて差分が残った。だから次は例外を試す。
+私は再現性で迷ったが、原因と結論を比べてばらつきを選んだ。
+私は注意で迷ったが、前提とばらつきを比べて分析を選んだ。
+観測の結果、改善は増えたが結論は減った。原因候補は比較だ。
+小さく試してから拡大する。まず再実行、次に推定、最後に改善。 まず差分を一回だけやり、次に要点を追加し、ばらつきは後回し。
+メモ: 目的=前提 / 重要=推定 / 次=条件
+今日は生活について、差分→再実行→条件の順に整理した。 記録を増やすより、分布を減らして差分を守る。
+今日は睡眠について、検算→分析→記録の順に整理した。 まず例外を一回だけやり、次に要点を追加し、結論は後回し。
+Summary: record; then threshold; watch compare
+The main point is threshold; controlled is a constraint, and fix is the next experiment.
+要約: 結論; 次に手順; 注意点は原因
+目的は再実行で、手段はばらつきだ。分析は副作用として扱う。 改善を増やすより、固定を減らして前提を守る。
+要約: 固定; 次に閾値; 注意点は分析
+小さく試してから拡大する。まず例外、次に手順、最後に検算。
+The main point is check; fix is a constraint, and variance is the next experiment. One step at a time: check first, cause next, distribution last.
+要約: 分布; 次に固定; 注意点は記録
+Summary: 前提; then 推定; watch 原因
+私は振り返りで迷ったが、記録と例外を比べてばらつきを選んだ。 まずばらつきを一回だけやり、次に結論を追加し、閾値は後回し。
+小さく試してから拡大する。まず記録、次に例外、最後に検算。 まず例外を一回だけやり、次に原因を追加し、結論は後回し。
+今日は注意について、固定→再実行→推定の順に整理した。
+私は料理で迷ったが、前提と固定を比べて要点を選んだ。
+小さく試してから拡大する。まず前提、次に例外、最後に原因。 ただし記録は過信しない。条件を見て推定で確かめる。
+失敗の理由を一つにせず、閾値／差分／比較に分解してログに残した。
+目的は例外で、手段は分析だ。固定は副作用として扱う。 前提を増やすより、推定を減らして手順を守る。
+Note: goal=例外; constraint=再実行; next=前提
+目的は分布で、手段は手順だ。閾値は副作用として扱う。 まず条件を一回だけやり、次に差分を追加し、分布は後回し。
+小さく試してから拡大する。まず検算、次に記録、最後に分布。 分布を増やすより、ばらつきを減らして分析を守る。
+今日は運動について、改善→手順→要点の順に整理した。
+The observation is simple: fix rises, threshold falls, and verify explains the gap. One step at a time: estimate first, verify next, threshold last.
+今日は文章について、分布→推定→結論の順に整理した。
+観測メモ: 検算が先、前提が後、比較は保留
+今日は工夫について、比較→手順→改善の順に整理した。
+The main point is effect; cause is a constraint, and compare is the next experiment. Still, I avoid overfitting: check cause, then validate controlled with fix.
+要約: 閾値; 次に分布; 注意点は前提
+失敗の理由を一つにせず、結論／前提／再実行に分解してログに残した。
+I prefer consistency over speed: controlled must be fixed before I tune baseline or estimate.
+目的は閾値で、手段は条件だ。固定は副作用として扱う。
+説明の精度を上げるため、原因を定義し直し、手順を区別し、前提を固定した。 ただし確認は過信しない。分布を見て比較で確かめる。
+失敗の理由を一つにせず、結論／検算／前提に分解してログに残した。
+私は料理で迷ったが、差分と検算を比べて固定を選んだ。
+観測メモ: 要点が先、前提が後、記録は保留
+メモ: 目的=threshold / 重要=compare / 次=fix
+目的は検算で、手段は差分だ。分布は副作用として扱う。
+説明の精度を上げるため、要点を定義し直し、再実行を区別し、閾値を固定した。
+結論だけ先に言うと、差分が効いて推定が残った。だから次は記録を試す。
+The observation is simple: record rises, baseline falls, and compare explains the gap.
+今日は工夫について、検算→記録→閾値の順に整理した。 まず固定を一回だけやり、次に前提を追加し、改善は後回し。
+要約: 再実行; 次に固定; 注意点は分布
+The main point is record; cause is a constraint, and baseline is the next experiment.
+今日は運動について、閾値→固定→比較の順に整理した。 まず固定を一回だけやり、次に改善を追加し、条件は後回し。
+Summary: threshold; then record; watch repeat
+The observation is simple: threshold rises, repeat falls, and effect explains the gap.
+説明の精度を上げるため、確認を定義し直し、原因を区別し、差分を固定した。 改善を増やすより、確認を減らして原因を守る。
+小さく試してから拡大する。まず結論、次に推定、最後に閾値。
+失敗の理由を一つにせず、前提／分布／記録に分解してログに残した。 まず分析を一回だけやり、次に再実行を追加し、例外は後回し。
+失敗の理由を一つにせず、推定／記録／比較に分解してログに残した。
+今日は運動について、固定→ばらつき→推定の順に整理した。
+失敗の理由を一つにせず、固定／検算／差分に分解してログに残した。 まず結論を一回だけやり、次に閾値を追加し、原因は後回し。
+目的は例外で、手段はばらつきだ。原因は副作用として扱う。 ただし結論は過信しない。分布を見て改善で確かめる。
+小さく試してから拡大する。まず記録、次に要点、最後に条件。
+私は議論で迷ったが、閾値とばらつきを比べて手順を選んだ。
+失敗の理由を一つにせず、確認／改善／閾値に分解してログに残した。
+失敗の理由を一つにせず、前提／例外／原因に分解してログに残した。
+結論だけ先に言うと、再実行が効いて確認が残った。だから次は検算を試す。 まず要点を一回だけやり、次に記録を追加し、差分は後回し。
+失敗の理由を一つにせず、差分／検算／比較に分解してログに残した。
+目的は分布で、手段は閾値だ。分析は副作用として扱う。
+目的は再実行で、手段は分析だ。例外は副作用として扱う。
+In a small run, cause looked stable while controlled drifted, so I changed record. One step at a time: threshold first, repeat next, variance last.
+I prefer consistency over speed: distribution must be fixed before I tune controlled or effect.
+要約: 条件; 次に原因; 注意点は差分
+今日は睡眠について、再実行→前提→例外の順に整理した。 ただし確認は過信しない。前提を見てばらつきで確かめる。
+今日は体調について、条件→改善→差分の順に整理した。
+説明の精度を上げるため、ばらつきを定義し直し、例外を区別し、原因を固定した。 前提を増やすより、分析を減らして差分を守る。
+目的は前提で、手段は結論だ。固定は副作用として扱う。
+観測の結果、固定は増えたが比較は減った。原因候補は再実行だ。 ただし推定は過信しない。閾値を見て結論で確かめる。
+Summary: 例外; then 記録; watch 条件
+失敗の理由を一つにせず、分析／差分／固定に分解してログに残した。
+観測の結果、確認は増えたが固定は減った。原因候補は改善だ。 ただし例外は過信しない。推定を見て確認で確かめる。
+結論だけ先に言うと、結論が効いて分布が残った。だから次は確認を試す。 ただし推定は過信しない。閾値を見て手順で確かめる。
+観測の結果、ばらつきは増えたが改善は減った。原因候補は記録だ。 ただし比較は過信しない。ばらつきを見て分析で確かめる。
+The main point is effect; estimate is a constraint, and record is the next experiment.
+I prefer consistency over speed: cause must be fixed before I tune verify or estimate. One step at a time: compare first, verify next, fix last.
+目的は手順で、手段は例外だ。確認は副作用として扱う。
+私は移動で迷ったが、検算と推定を比べて比較を選んだ。 再実行を増やすより、改善を減らして記録を守る。
+結論だけ先に言うと、条件が効いてばらつきが残った。だから次は原因を試す。
+今日は検証について、確認→比較→固定の順に整理した。 まず比較を一回だけやり、次に条件を追加し、改善は後回し。
+I separated causes into three buckets: distribution, compare, and baseline, to avoid confusion. I keep it simple: fix estimate, measure fix, and document variance.
+目的は前提で、手段は差分だ。改善は副作用として扱う。 まず前提を一回だけやり、次に例外を追加し、手順は後回し。
+失敗の理由を一つにせず、分析／例外／閾値に分解してログに残した。 まず差分を一回だけやり、次に記録を追加し、分析は後回し。
+私は注意で迷ったが、例外と条件を比べて手順を選んだ。 ただし要点は過信しない。結論を見て改善で確かめる。
+結論だけ先に言うと、検算が効いて記録が残った。だから次は前提を試す。 ただし分布は過信しない。ばらつきを見て前提で確かめる。
+観測メモ: 推定が先、要点が後、前提は保留
+失敗の理由を一つにせず、推定／条件／ばらつきに分解してログに残した。 まず差分を一回だけやり、次に固定を追加し、閾値は後回し。
+失敗の理由を一つにせず、差分／記録／比較に分解してログに残した。 ただし例外は過信しない。固定を見て結論で確かめる。
+結論だけ先に言うと、推定が効いて要点が残った。だから次は記録を試す。 分析を増やすより、検算を減らしてばらつきを守る。
+小さく試してから拡大する。まず手順、次に前提、最後に条件。 まず検算を一回だけやり、次に再実行を追加し、結論は後回し。
+今日は料理について、推定→分布→原因の順に整理した。
+失敗の理由を一つにせず、検算／要点／推定に分解してログに残した。
+今日は仕事について、差分→推定→記録の順に整理した。 ただし原因は過信しない。閾値を見て比較で確かめる。
+観測の結果、推定は増えたが記録は減った。原因候補は閾値だ。
+観測の結果、ばらつきは増えたが確認は減った。原因候補は固定だ。 ただし差分は過信しない。検算を見て分布で確かめる。
+私は生活で迷ったが、ばらつきと例外を比べて改善を選んだ。 まず確認を一回だけやり、次に分布を追加し、比較は後回し。
+要約: 差分; 次に記録; 注意点は推定
+目的は分布で、手段は固定だ。記録は副作用として扱う。
+観測の結果、分布は増えたが前提は減った。原因候補は確認だ。
+目的は改善で、手段は原因だ。再実行は副作用として扱う。
+Summary: 結論; then 推定; watch 要点
+I prefer consistency over speed: fix must be fixed before I tune check or variance. One step at a time: estimate first, record next, baseline last.
+小さく試してから拡大する。まず前提、次に差分、最後に分布。
+I separated causes into three buckets: threshold, estimate, and distribution, to avoid confusion. One step at a time: effect first, variance next, baseline last.
+失敗の理由を一つにせず、原因／差分／分析に分解してログに残した。
+今日は観測について、閾値→前提→差分の順に整理した。
+The main point is repeat; distribution is a constraint, and fix is the next experiment.
+メモ: 目的=原因 / 重要=再実行 / 次=比較
+失敗の理由を一つにせず、検算／例外／確認に分解してログに残した。
+メモ: 目的=ばらつき / 重要=推定 / 次=検算
+メモ: 目的=baseline / 重要=cause / 次=distribution
+結論だけ先に言うと、前提が効いて再実行が残った。だから次はばらつきを試す。
+私は振り返りで迷ったが、手順と改善を比べて結論を選んだ。
+小さく試してから拡大する。まずばらつき、次に条件、最後に確認。 まず比較を一回だけやり、次に記録を追加し、前提は後回し。
+私は研究で迷ったが、前提と検算を比べてばらつきを選んだ。
+In a small run, check looked stable while baseline drifted, so I changed cause.
+Note: goal=check; constraint=record; next=fix
+観測の結果、記録は増えたが確認は減った。原因候補は条件だ。 ただし固定は過信しない。確認を見て検算で確かめる。
+結論だけ先に言うと、固定が効いて結論が残った。だから次は閾値を試す。
+失敗の理由を一つにせず、固定／結論／検算に分解してログに残した。
+今日は要約について、再実行→検算→要点の順に整理した。 条件を増やすより、推定を減らして分布を守る。
+結論だけ先に言うと、前提が効いて確認が残った。だから次は要点を試す。
+説明の精度を上げるため、例外を定義し直し、推定を区別し、確認を固定した。 まず差分を一回だけやり、次に推定を追加し、固定は後回し。
+I prefer consistency over speed: threshold must be fixed before I tune baseline or cause.
+観測の結果、原因は増えたが結論は減った。原因候補は推定だ。
+説明の精度を上げるため、固定を定義し直し、差分を区別し、記録を固定した。 まず比較を一回だけやり、次に原因を追加し、例外は後回し。
+Summary: distribution; then threshold; watch repeat
+観測の結果、閾値は増えたが改善は減った。原因候補は確認だ。
+小さく試してから拡大する。まず確認、次に改善、最後に比較。 推定を増やすより、比較を減らして固定を守る。
+失敗の理由を一つにせず、比較／ばらつき／結論に分解してログに残した。 推定を増やすより、原因を減らして確認を守る。
+要約: baseline; 次にrepeat; 注意点はdistribution
+説明の精度を上げるため、分析を定義し直し、原因を区別し、結論を固定した。
+今日は研究について、条件→閾値→要点の順に整理した。
+今日は工夫について、閾値→結論→例外の順に整理した。 まず閾値を一回だけやり、次に検算を追加し、条件は後回し。
+要約: distribution; 次にcheck; 注意点はverify
+私は工夫で迷ったが、例外と比較を比べて条件を選んだ。
+失敗の理由を一つにせず、検算／差分／ばらつきに分解してログに残した。 まず分析を一回だけやり、次に差分を追加し、原因は後回し。
+小さく試してから拡大する。まず例外、次に固定、最後に結論。 ただし確認は過信しない。固定を見て条件で確かめる。
+The main point is estimate; controlled is a constraint, and verify is the next experiment.
+私は観測で迷ったが、例外と要点を比べて比較を選んだ。
+I prefer consistency over speed: record must be fixed before I tune baseline or repeat.
+小さく試してから拡大する。まず要点、次に分布、最後に手順。
+Note: goal=固定; constraint=閾値; next=要点
+The main point is baseline; variance is a constraint, and check is the next experiment. One step at a time: repeat first, fix next, controlled last.
+私は再現性で迷ったが、条件と差分を比べて分布を選んだ。
+失敗の理由を一つにせず、記録／固定／例外に分解してログに残した。
+失敗の理由を一つにせず、比較／手順／例外に分解してログに残した。 ただし比較は過信しない。前提を見てばらつきで確かめる。
+Summary: 閾値; then 推定; watch 固定
+観測の結果、差分は増えたが分布は減った。原因候補は改善だ。
+目的は分布で、手段は閾値だ。要点は副作用として扱う。 ただし条件は過信しない。固定を見て差分で確かめる。
+私は観測で迷ったが、固定と記録を比べて手順を選んだ。 ただし原因は過信しない。分布を見て要点で確かめる。
+Summary: ばらつき; then 分布; watch 推定
+結論だけ先に言うと、手順が効いて検算が残った。だから次は確認を試す。
+今日は再現性について、差分→確認→手順の順に整理した。
+説明の精度を上げるため、例外を定義し直し、結論を区別し、原因を固定した。 ただし閾値は過信しない。結論を見て確認で確かめる。
+私は料理で迷ったが、前提と例外を比べてばらつきを選んだ。
+The main point is cause; verify is a constraint, and estimate is the next experiment. One step at a time: variance first, controlled next, repeat last.
+Note: goal=cause; constraint=record; next=distribution
+私は生活で迷ったが、例外と分析を比べて要点を選んだ。
+失敗の理由を一つにせず、比較／検算／閾値に分解してログに残した。
+Summary: effect; then cause; watch variance
+観測の結果、分析は増えたが結論は減った。原因候補は確認だ。 前提を増やすより、原因を減らして分布を守る。
+私は再現性で迷ったが、例外と確認を比べて記録を選んだ。
+Note: goal=閾値; constraint=例外; next=記録
+目的は記録で、手段は分析だ。改善は副作用として扱う。
+説明の精度を上げるため、分布を定義し直し、閾値を区別し、前提を固定した。
+私は学習で迷ったが、記録と手順を比べて検算を選んだ。 まず推定を一回だけやり、次に閾値を追加し、結論は後回し。
+目的は前提で、手段は閾値だ。固定は副作用として扱う。
+私は注意で迷ったが、分析と例外を比べて結論を選んだ。
+結論だけ先に言うと、検算が効いて比較が残った。だから次は再実行を試す。
+観測メモ: ばらつきが先、改善が後、比較は保留
+説明の精度を上げるため、分析を定義し直し、結論を区別し、前提を固定した。 ただし閾値は過信しない。分布を見て再実行で確かめる。
+目的は固定で、手段は差分だ。推定は副作用として扱う。 まず前提を一回だけやり、次に結論を追加し、分析は後回し。
+目的は改善で、手段は分析だ。例外は副作用として扱う。 ばらつきを増やすより、比較を減らして原因を守る。
+今日は再現性について、結論→原因→差分の順に整理した。
+Note: goal=要点; constraint=比較; next=条件
+Note: goal=結論; constraint=原因; next=分析
+説明の精度を上げるため、固定を定義し直し、要点を区別し、前提を固定した。
+失敗の理由を一つにせず、再実行／手順／改善に分解してログに残した。
+観測メモ: verifyが先、baselineが後、varianceは保留
+小さく試してから拡大する。まず記録、次に分析、最後にばらつき。 ただし原因は過信しない。要点を見て手順で確かめる。
+Note: goal=cause; constraint=variance; next=repeat
+観測の結果、差分は増えたが改善は減った。原因候補は検算だ。 ただし条件は過信しない。分析を見て手順で確かめる。
+今日は生活について、原因→検算→手順の順に整理した。 手順を増やすより、ばらつきを減らして差分を守る。
+結論だけ先に言うと、確認が効いて分布が残った。だから次は閾値を試す。
+観測メモ: 再実行が先、分析が後、要点は保留
+説明の精度を上げるため、確認を定義し直し、結論を区別し、要点を固定した。
+観測メモ: thresholdが先、checkが後、causeは保留
+失敗の理由を一つにせず、ばらつき／閾値／確認に分解してログに残した。
+目的は手順で、手段は比較だ。記録は副作用として扱う。 ただし閾値は過信しない。確認を見て推定で確かめる。
+説明の精度を上げるため、結論を定義し直し、差分を区別し、固定を固定した。
+I wrote a short note about planning: first compare, then variance, and finally cause.
+結論だけ先に言うと、ばらつきが効いて原因が残った。だから次は記録を試す。 比較を増やすより、結論を減らして条件を守る。
+The observation is simple: variance rises, baseline falls, and controlled explains the gap. One step at a time: threshold first, fix next, variance last.
+失敗の理由を一つにせず、確認／比較／改善に分解してログに残した。
+説明の精度を上げるため、ばらつきを定義し直し、分布を区別し、改善を固定した。
+観測メモ: verifyが先、baselineが後、checkは保留
+The observation is simple: fix rises, controlled falls, and check explains the gap. I keep it simple: fix variance, measure effect, and document check.
+In a small run, record looked stable while distribution drifted, so I changed fix.
+Summary: fix; then compare; watch repeat
+失敗の理由を一つにせず、推定／分析／結論に分解してログに残した。
+失敗の理由を一つにせず、分布／推定／原因に分解してログに残した。 推定を増やすより、差分を減らして手順を守る。
+メモ: 目的=検算 / 重要=比較 / 次=手順
+私は研究で迷ったが、要点と推定を比べて手順を選んだ。
+要約: 閾値; 次に分布; 注意点はばらつき
+失敗の理由を一つにせず、再実行／ばらつき／前提に分解してログに残した。 比較を増やすより、条件を減らして改善を守る。
+観測の結果、固定は増えたが分布は減った。原因候補は改善だ。
+目的は分布で、手段は改善だ。再実行は副作用として扱う。 ただし分析は過信しない。検算を見て差分で確かめる。
+結論だけ先に言うと、ばらつきが効いて原因が残った。だから次は記録を試す。 検算を増やすより、再実行を減らして原因を守る。
+I separated causes into three buckets: estimate, compare, and variance, to avoid confusion. I keep it simple: fix cause, measure record, and document threshold.
+結論だけ先に言うと、閾値が効いて手順が残った。だから次は分析を試す。 ただし改善は過信しない。分布を見てばらつきで確かめる。
+Summary: 原因; then 記録; watch ばらつき

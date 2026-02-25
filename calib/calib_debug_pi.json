@@ -1,0 +1,6 @@
+{
+  "complexity": { "q50": 0.60, "q95": 0.70 },
+  "calibration_corpus": "DEBUG_ONLY",
+  "n_samples": 0,
+  "note": "DEBUG: lower q50/q95 so pi_norm becomes nonzero for inspection."
+}

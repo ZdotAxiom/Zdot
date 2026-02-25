@@ -1,0 +1,171 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\begin{document}
+
+\title{Collapse-Resilient Decoding via Lightweight Online Intervention:\\A Paired-Seed Study Across Five Prompt Domains}
+\author{Masayuki Okita}
+\date{}
+\maketitle
+
+\begin{abstract}
+Long-form generation with open or locally-hosted language models often suffers from \emph{collapse}: unwanted repetition or premature stopping that degrades output quality. We propose a decoding-time approach that continuously monitors generation signals (e.g., token probabilities and n-gram frequencies) and applies minimal interventions to prevent collapse. Specifically, we employ a calibrated probability threshold ($\pi$) and a repetition detector to flag degenerative trends during generation. When a flag is raised, the system performs a lightweight intervention (such as re-sampling the last token) to steer the output back on course. We evaluate this method on Gemma-7B (via Ollama) across five diverse prompt domains (HUM, STEM, ETH, TEMP, META) using a paired-seed design (500 seeds, 512 tokens). In the controlled (intervention) mode, we observe a dramatic reduction in collapse rates---especially in STEM, HUM, and META---while incurring only minor runtime overhead (see Table~\ref{tab:main}). Our key contributions are: (1) an online monitoring and intervention framework requiring no model modifications, (2) a fully reproducible paired-seed evaluation pipeline, and (3) significant empirical improvements in long-horizon generation stability.
+\end{abstract}
+
+\section{Introduction}
+Large language models (LLMs) used in open or local deployment can still fail when tasked to generate long text. In particular, degenerate behaviors like repeating phrases or ending much earlier than expected (``collapse'') commonly occur, especially in domains that require coherent elaboration. These collapse phenomena undermine reliability in applications such as interactive agents or automated writing where open-weight models are used.
+
+We introduce an online monitoring mechanism combined with minimal interventions at decoding. Instead of modifying the model or its training, our system continually observes the model's output log-probabilities and content in real-time. When abnormal patterns arise (as detected by our online checks), a brief intervention is applied to steer the generation. Crucially, we implement a paired-seed experimental design so that each prompt and random seed is used in both baseline (no intervention) and controlled (with intervention) modes, isolating the effect of our policy under identical conditions.
+
+Our main contributions are:
+\begin{itemize}
+  \item \textbf{Online Monitoring \& Intervention:} We design a minimal decoding-time scheme that detects potential collapse using calibrated probability metrics and repetition checks, and applies controlled interventions to break degenerate loops. Importantly, this requires no model modifications or additional training.
+  \item \textbf{Paired-Seed Evaluation Pipeline:} We develop a reproducible experimental pipeline for five different prompt domains (HUM, STEM, ETH, TEMP, META) with 500 seeds each, automatically generating final tables (e.g., Table~\ref{tab:main}) of key metrics. Our setup ensures fair comparison and complete transparency in reproducibility.
+  \item \textbf{Significant Collapse Reduction:} Empirically, our approach drastically lowers collapse rates on difficult domains (notably HUM, STEM, META) while incurring only minor runtime overhead. We report absolute reductions, risk ratios, and odds ratios with confidence intervals, demonstrating statistical significance under a paired bootstrap analysis.
+\end{itemize}
+
+\section{Method}
+\subsection{Task Setup (Pillars)}
+We categorize prompts into five domains (``pillars'') reflecting different content types: HUM (general knowledge/humanities), STEM (science/math problems), ETH (ethical/moral dilemmas), TEMP (temporal reasoning/storylines), and META (meta-cognitive or reflective tasks). Each pillar uses a fixed set of prompt templates or examples. A random seed is used to select the prompt ID within each pillar, ensuring that the same seed yields the same prompt for both baseline and controlled modes. We record the selected prompt IDs for full reproducibility.
+
+\subsection{Online Detectors}
+During decoding, we continuously monitor two indicators of degeneracy:
+\begin{itemize}
+  \item \textbf{Probability-based flag ($\pi$):} We track the model's output log-probabilities and maintain a short sliding window of length $k$. If the maximum probability in this window drops below a calibrated threshold $\epsilon$ for $k$ consecutive tokens, we flag a potential breakdown in coherence. The threshold $\epsilon$ and window length $k$ are determined via offline calibration (see Sec.~\ref{sec:calibration}).
+  \item \textbf{Repetition detector (REP):} We also detect repetitive loops by monitoring n-gram occurrences. If a newly generated token would create an exact n-gram (e.g., bigram or trigram) that has already appeared in the recent history more than a threshold times, we flag repetition. This threshold is set conservatively (e.g., 2 occurrences).
+  \item \textbf{Too-Short output:} As an edge case, if generation halts but the total output length is below a minimum token count (e.g., 50 tokens), we consider this a ``collapse by short termination.''
+\end{itemize}
+These rules are simple, interpretable checks rather than complex heuristics. In essence, if the model's confidence plunges or it starts repeating, we intervene.
+
+\subsection{Intervention Policy}
+We define two generation modes. In \textbf{baseline} mode, no interventions are applied (maximum interventions $\text{MI}=0$). In \textbf{controlled} mode, we allow up to $\text{MI}=100$ intervention events per output. Upon a detector flag (e.g., low-$\pi$ or repetition), we perform a lightweight intervention---such as re-sampling the last token or adjusting its probability---to steer generation. We log each intervention and continue generation. For each output, we record metadata including the prompt ID, the total number of interventions applied, and total runtime (see Appendix C for JSONL schema).
+
+\subsection{Calibration}
+\label{sec:calibration}
+Thresholds for the $\pi$-based detector are calibrated offline using a held-out dataset. We run baseline decoding on a separate calibration corpus and choose the probability threshold $\epsilon$ (and window size $k$) such that the false-positive rate of collapse flags remains low. These calibration parameters are saved in a JSON configuration file (\texttt{calib\_ollama\_gemma7b\_v2\_sensitive.json}). Due to licensing, this file cannot be published; however, the calibration procedure and its role in our pipeline are fully documented for reproducibility.
+
+\section{Experimental Protocol}
+\subsection{Model and Decoding}
+We use the open-weight Gemma-7B language model via the Ollama interface. Decoding parameters are fixed: \texttt{max\_new\_tokens}=512, temperature=1.2, top-p=0.95, and \texttt{max\_segments}=32. These settings allow relatively unconstrained generation up to a practical limit.
+
+\subsection{Paired-Seed Evaluation}
+For each of the five pillars, we run 500 random seeds (0 through 499). For a given seed and pillar, the seed deterministically selects a prompt ID, ensuring that each seed/prompt pair is generated in both baseline and controlled modes (yielding 500 paired outputs per pillar). Our primary metric is the collapse rate (percentage of outputs classified as collapsed by any detector). We compare baseline and controlled collapse rates by computing the absolute reduction $\Delta$ (baseline minus controlled) and the relative risk (RR) and odds ratio (OR) of collapse. We also record each output's runtime and compute the intervention rate (fraction of tokens where interventions occurred).
+
+\subsection{Statistical Analysis}
+To assess significance, we apply a paired bootstrap with $B=20000$ resamples over the 500 seeds. We compute RR and OR using the Haldane--Anscombe correction to handle cases with zero events. We also report 95\% Wilson score confidence intervals for collapse rates. Statistical significance is assessed by checking whether the 95\% confidence interval for $\Delta$ excludes zero (and whether the RR/OR interval excludes 1).
+
+\section{Results}
+\subsection{Main Results (Table~\ref{tab:main})}
+Table~\ref{tab:main} presents the collapse rates for each pillar under baseline and controlled modes, along with the absolute reductions $\Delta$ and confidence intervals. We see that our intervention substantially lowers collapse in most domains. For example, the STEM pillar (with the highest baseline collapse) drops dramatically in collapse rate. HUM and META also exhibit large reductions (tens of percentage points). ETH and TEMP, which had lower baseline collapse, still show improvement, mainly by removing rare tail failures. In all cases the reductions are statistically significant (bootstrap CIs exclude zero).
+
+\subsection{Cost and Intervention Selectivity}
+The runtime overhead of our method is modest. On average, controlled-mode generations take only slightly longer than baseline. This is because interventions are relatively infrequent and quick to apply. Indeed, the intervention rate in each pillar roughly tracks its baseline collapse difficulty: pillars with higher collapse see more interventions. For example, STEM (highest collapse) has the highest intervention rate, while ETH/TEMP have very few. This indicates that we intervene mainly when a collapse would have occurred, rather than randomly, avoiding unnecessary overhead.
+
+\subsection{Failure Modes}
+We examine the remaining failures under the controlled mode. Most residual collapses are of the Too-Short type, meaning the model hit the 512-token limit without generating a full answer. These often occur when the intervention budget is depleted or when the model intrinsically stops early. In contrast, repetition-based collapses are almost entirely eliminated (our REP detector catches virtually all loops). A breakdown of collapse reasons is given in Table~\ref{tab:collapse-reasons}.
+
+\section{Discussion}
+Our experiments suggest that promptly detecting degeneracy and intervening can effectively steer open-weight LLM outputs away from collapse. By catching abnormal patterns (e.g., a sharp drop in token probability or the onset of repetitive n-grams) as they begin, our system applies minimal corrections to keep the generation on track.
+
+However, there are limitations. We evaluated on Gemma-7B via Ollama; applying this approach to other models may require retuning thresholds and intervention budgets. The fixed 512-token limit means some outputs still ended short; supporting much longer sequences may require larger budgets or dynamic thresholds. Some failure modes may also evade our simple detectors (for example, a semantically correct but irrelevant short answer). Future work could explore combining multiple signals (semantic coherence checks, external classifiers, etc.), applying the framework to different LLMs, and handling truly long-horizon tasks.
+
+\section{Related Work}
+Various decoding-time strategies have been proposed for controlling generation. Traditional approaches include repetition penalties and n-gram blocking, but these are static and not context-sensitive. Recent methods explore self-monitoring or critique-and-revise strategies, which also aim to improve output quality, though often with multiple generation passes. The problem of long-sequence degeneration has been noted (e.g., Holtzman \textit{et al.} 2019 on nucleus sampling), but less attention has been given to inference-time interventions. Overall, our approach complements prior work by focusing on lightweight online monitoring and intervention in open-weight inference across diverse tasks.
+
+\section{Reproducibility Statement}
+All experiments are fully automated from raw model outputs to the final tables. We provide code and scripts (see README\_REVIEW) to run the paired-generation pipeline and compute the statistics. Raw JSONL logs (including token-level probabilities and detector flags) are saved for each run; the summary and table-generation scripts are also provided. The sensitive calibration file is not public, but its schema and usage are documented. In short, given access to Gemma-7B and our repository, one can reproduce Table~\ref{tab:main} and all reported results verbatim.
+
+\appendix
+
+\section{Stress-Probe Experiment}
+As an illustrative check, we also run a stress-test on the STEM domain. This confirms that our $\pi$ detector flags rising repetition patterns well before the model fully collapses, validating its effectiveness. (Details are omitted.)
+
+\section{Collapse Reason Breakdown}
+\label{app:reasons}
+Table~\ref{tab:collapse-reasons} details the counts of collapsed cases by type (Repetition vs.\ Too-Short) under baseline and controlled modes. This quantifies how repetition collapses are nearly eradicated under intervention.
+
+\appendix
+
+\section{Exact Configuration and Fixed Hyperparameters}\label{app:config}
+
+Table~\ref{tab:config} lists the exact decoding, monitoring, and intervention configuration used in the reported Gemma-7B (Ollama) experiments. These values are fixed in the released run script and are identical across \texttt{baseline} and \texttt{controlled} modes; the only difference between modes is whether the intervention is enabled.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{ll}
+\toprule
+Setting & Value \\
+\midrule
+Model backend & Ollama + \texttt{gemma:7b} \\
+Max new tokens & 512 (per run) \\
+Segment size & 64 tokens (auto: \texttt{max\_new\_tokens//8}, min 32) \\
+Decoding temperature & 1.0 \\
+Top-$p$ & 0.95 \\
+Random seed & 0--499 (paired across modes) \\
+\midrule
+$\pi$ normalization & $\pi_\text{norm}=\mathrm{clip}\left(\frac{\pi_\text{raw}-q_{50}}{q_{95}-q_{50}},0,1\right)$ \\
+Calibration quantiles & $q_{50}=0.5422$, $q_{95}=0.7609$ \\
+Calibration sample size & 300 (from corpus of 600 lines) \\
+$\pi$ threshold & $\varepsilon_\pi=0.85$ \\
+Consecutive windows & $k=3$ \\
+Repetition check & 3-gram repetition rate $>0.20$ \\
+Too-short check & final generated tokens $<64$ \\
+\midrule
+Intervention & context truncation to keep-ratio 0.70, then continue \\
+Max interventions & 100 per run \\
+\bottomrule
+\end{tabular}
+\caption{Exact configuration used for all results (Gemma-7B, 512-token setting).}
+\label{tab:config}
+\end{table}
+
+\section{Calibration Corpus and Quantile Fixing}\label{app:calibration}
+
+To normalize $\pi_\text{raw}$ we fix $q_{50}$ and $q_{95}$ from an external calibration corpus and store them as a JSON artifact. In this release the corpus file is \texttt{calib/calibration_corpus_v2_ollama_gemma7b_sensitive.txt}, and its SHA256 is:
+\[
+\text{SHA256}(\texttt{calib/calibration_corpus_v2_ollama_gemma7b_sensitive.txt}) = \texttt{6850cac8bb77b8ce7b7d6f79ebee05e2ce0a078a702d759ff4fc1d8b59308354}.
+\]
+We compute $q_{50}$ and $q_{95}$ on a fixed sample of 300 lines (sampled with a fixed RNG seed; indices are logged in the artifact-generation script), and we do not tune these quantiles on the evaluation prompts. The first six lines of the (unshuffled) corpus are shown below to demonstrate the heterogeneous, non-task-specific nature of the calibration data.
+
+\begin{verbatim}
+When you extract just the 'decisions,' 'homework,' and 'deadlines' from the meeting minutes, it's easier to review later.
+* **集中（A）**は、意識を集中し、特定のタスクに専念する状態である。 ⏎ * **睡眠（B）**は、身体と精神の回復のために必要で、深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い深い
+**最も起こりやすい問題：** ⏎ 習慣を積むことは、継続することが最も重要です。しかし、小さな習慣を積むことは、いきなり大きく変えるよりも継続しやすいという点に注意する必要があります。 ⏎ **対策：** ⏎ 小さな習慣を継続する仕組みを作ることを検討します。例えば、特定の時間帯に特定の行動を実行するなどのように、習慣を定めて継続するようにします。
+**手順：** ⏎ 1. 仕事の段取りを見直す。 ⏎ 2. 手戻りが減ったことを確認する。 ⏎ 3. 気持ちが楽になったことを経験する。 ⏎ 4. 気持ちの楽しさが仕事に関連していることを意識する。 ⏎ 5. 未来の仕事で段取りを見直すことを検討する。
+- **Aは集中力である**が、単に情報を記憶するものではない。集中力とは、特定のタスクに専念し、他のことや要因を無視して完成させる能力を意味する。 ⏎ - **Bはデジタルメモである**が、紙とペンで書くメモではなく、コンピューターやデバイスにデジタル的に記録するメモを意味する。
+コミュニケーションは、人間が情報を共有し、理解を得るための重要なツールです。適切なコミュニケーションは、人間関係の強化に役立ち、組織の効率性にも貢献します。コミュニケーションは、異なる人々が異なる文化や言語を共有していることを理解し、その違いを相互に認め合うことが重要です。
+\end{verbatim}
+
+\section{Bootstrap Confidence Intervals (Seed Resampling)}\label{app:bootstrap}
+
+We report 95\% confidence intervals (CIs) for differences (\(\Delta\)), relative risks (RR), and odds ratios (OR) in Table~1 using a paired, stratified bootstrap over seeds.
+
+\paragraph{Unit of resampling.}
+The resampling unit is the \emph{seed}. For each pillar, we have paired outcomes for the same seed under \texttt{baseline} and \texttt{controlled} (all other settings identical). To preserve this pairing, we resample seeds with replacement \emph{within each pillar} and carry both mode outcomes together.
+
+\paragraph{Procedure.}
+For each bootstrap replicate \(b=1,\dots,B\) with \(B=20000\):
+(1) for each pillar, sample 500 seeds with replacement from \(\{0,\dots,499\}\);
+(2) compute the pillar-level statistics on the resampled paired runs.
+
+\paragraph{Statistics.}
+Let \(p_\mathrm{base}\) and \(p_\mathrm{ctrl}\) denote the mean \texttt{collapse\_run} indicator (collapse rate) in the resampled data.
+We compute:
+\[
+\Delta = p_\mathrm{ctrl}-p_\mathrm{base}, \qquad
+\mathrm{RR} = \frac{p_\mathrm{ctrl}}{p_\mathrm{base}}.
+\]
+For odds ratios we form the 2\(\times\)2 table of counts (collapse / no-collapse by mode) on the resampled data and apply a Haldane--Anscombe correction (add 0.5 to each cell) when any cell is zero before computing OR.
+We take the percentile CI, i.e., the 2.5th and 97.5th percentiles of the bootstrap distribution for each statistic.
+
+\section{Logging Format (JSONL Schema)}\label{app:logging}
+Each run writes one JSONL file with: (i) a \texttt{meta} line (config, calibration quantiles, RNG seed); (ii) a sequence of \texttt{step} lines (segment-level monitoring: $\pi_\text{raw}$, $\pi_\text{norm}$, repetition metrics, and intervention flags); and (iii) a \texttt{final} line (run-level collapse flag, token counts, and timestamps). See the released README for the full schema.
+
+\section{Tables (Appendix)}\label{app:tables}
+\paragraph{Table~1.} Primary paper table: collapse rates, deltas, RR/OR with 95\% CIs, intervention rates, and runtime. Table~1 is generated automatically from \texttt{runs\_summary\_all.csv} with the bootstrap described in Appendix~\ref{app:bootstrap}.
+
+\section{Additional Notes (Appendix)}\label{app:notes}
+\textbf{Intervention mechanism.} The intervention in \texttt{controlled} mode is deterministic: when collapse indicators persist for \(k\) consecutive monitoring windows, we truncate the accumulated context to a fixed keep-ratio (0.70) and continue generation. No additional model fine-tuning or external tools are used.

@@ -1,0 +1,381 @@
+#!/usr/bin/env python3
+# vNEXT Ollama Runner (Qwen2.5 14B etc.)
+# - no transformers
+# - collapse detection via pi (gzip/entropy) + repetition (text ngram)
+# - intervention = context reset (keep_ratio) + regenerate
+# - outputs JSONL compatible with validate_and_summarize_vnext.py / make_table1_vnext.py
+
+import argparse, json, time, os, random, re, math
+from pathlib import Path
+from datetime import datetime, timezone
+import requests
+import numpy as np
+
+def utc_now_iso_z():
+    # timezone-aware UTC ISO8601
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+def read_prompt_block(path: str, seed: int) -> str:
+    txt = Path(path).read_text(encoding="utf-8")
+    blocks = [b.strip() for b in txt.strip().split("\n\n") if b.strip()]
+    if not blocks:
+        raise ValueError(f"no blocks in {path}")
+    idx = seed % len(blocks)
+    return blocks[idx]
+
+def gzip_ratio(s: str) -> float:
+    import gzip
+    raw = s.encode("utf-8", errors="ignore")
+    comp = gzip.compress(raw)
+    if len(raw) == 0:
+        return 1.0
+    return len(comp) / len(raw)
+
+def char_entropy(s: str) -> float:
+    if not s:
+        return 0.0
+    from collections import Counter
+    c = Counter(s)
+    n = len(s)
+    H = 0.0
+    for k,v in c.items():
+        p = v / n
+        H -= p * math.log(p + 1e-12, 2)
+    return H
+
+def pi_raw_proxy(s: str) -> float:
+    # proxy PI: combine gzip ratio + inverse entropy (higher = "worse")
+    gr = gzip_ratio(s)
+    H  = char_entropy(s)
+    invH = 1.0 / (H + 1e-6)
+    # weight: gzip dominates, entropy stabilizes
+    return 0.75 * gr + 0.25 * invH
+
+def load_calib(calib_path: str):
+    import json
+    c = json.load(open(calib_path, "r", encoding="utf-8"))
+
+    # vNEXT-ollama: top-level q50/q95
+    if "q50" in c and "q95" in c:
+        return float(c["q50"]), float(c["q95"]), c
+
+    # backward compat: older schema might be {"complexity": {"q50":..., "q95":...}}
+    if "complexity" in c and isinstance(c["complexity"], dict) and "q50" in c["complexity"] and "q95" in c["complexity"]:
+        return float(c["complexity"]["q50"]), float(c["complexity"]["q95"]), c
+
+    raise KeyError("calib must contain q50/q95 at top-level or under 'complexity'")
+
+def pi_norm(pi_raw: float, q50: float, q95: float) -> float:
+    if q95 <= q50:
+        return 1.0
+    x = (pi_raw - q50) / (q95 - q50)
+    return max(0.0, min(1.0, x))
+
+def repetition_score(text: str, n: int = 3) -> float:
+    # text-level ngram repetition ratio
+    toks = re.findall(r"\w+|[^\w\s]", text.lower(), flags=re.UNICODE)
+    if len(toks) < n * 2:
+        return 0.0
+    ngrams = [" ".join(toks[i:i+n]) for i in range(0, len(toks)-n+1)]
+    if not ngrams:
+        return 0.0
+    uniq = len(set(ngrams))
+    return 1.0 - (uniq / len(ngrams))
+
+def ollama_generate(model: str, prompt: str, temperature: float, top_p: float,
+                    max_new_tokens: int, seed: int, host: str="http://localhost:11434") -> tuple[str, dict]:
+    # NOTE: Ollama "seed" is supported in recent versions; if ignored, we still have deterministic intervention logic.
+    url = f"{host}/api/generate"
+    payload = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "temperature": float(temperature),
+            "top_p": float(top_p),
+            "num_predict": int(max_new_tokens),
+            "seed": int(seed),
+        }
+    }
+    r = requests.post(url, json=payload, timeout=600)
+    r.raise_for_status()
+    j = r.json()
+    return j.get("response",""), j
+
+def truncate_context(text: str, keep_ratio: float) -> str:
+    if not text:
+        return text
+    keep_ratio = max(0.1, min(1.0, keep_ratio))
+    n = len(text)
+    k = int(n * keep_ratio)
+    return text[:k]
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--exp_id", required=True)
+    ap.add_argument("--seed", type=int, required=True)
+    ap.add_argument("--mode", choices=["baseline","controlled"], required=True)
+    ap.add_argument("--pillar", required=True)
+    ap.add_argument("--prompts", required=True)
+    ap.add_argument("--calib", required=True)
+    ap.add_argument("--out", required=True)
+
+    # ollama params
+    ap.add_argument("--ollama_model", default="qwen2.5:14b-instruct")
+    ap.add_argument("--ollama_host", default="http://localhost:11434")
+
+    # decode/collapse params
+    ap.add_argument("--max_new_tokens", type=int, default=512)
+    ap.add_argument("--temperature", type=float, default=1.2)
+    ap.add_argument("--top_p", type=float, default=0.95)
+
+    ap.add_argument("--epsilon_pi", type=float, default=0.85)
+    ap.add_argument("--k_consecutive", type=int, default=3)
+    ap.add_argument("--min_tokens", type=int, default=64)
+
+    ap.add_argument("--rep_ngram", type=int, default=3)
+    ap.add_argument("--rep_threshold", type=float, default=0.20)
+
+    ap.add_argument("--max_interventions", type=int, default=100)
+    ap.add_argument("--max_segments", type=int, default=0, help="0=auto")
+    ap.add_argument("--keep_ratio", type=float, default=0.70)
+    ap.add_argument("--treat_budget_as_collapse", type=int, default=1)
+
+    args = ap.parse_args()
+
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+
+    outp = Path(args.out)
+    outp.parent.mkdir(parents=True, exist_ok=True)
+
+    q50, q95, calib_obj = load_calib(args.calib)
+
+    prompt_block = read_prompt_block(args.prompts, args.seed)
+    user_input = f"[PILLAR={args.pillar}]\n{prompt_block}"
+
+    t0 = time.time()
+
+    # Build meta immediately (before any generation)
+    meta = {
+        "max_interventions": args.max_interventions,
+        "k_consecutive": args.k_consecutive,
+        "segment_max_new_tokens": segment_max_new_tokens,
+        "max_segments": max_segments,
+
+        "record_type": "meta",
+        "timestamp_start": utc_now_iso_z(),
+        "exp_id": str(args.exp_id),
+        "seed": int(args.seed),
+        "mode": str(args.mode),
+        "pillar": str(args.pillar),
+        "schema_version": "vNEXT-ollama-v1",
+        "ollama_model": str(args.ollama_model),
+        "ollama_host": str(args.ollama_host),
+        "max_new_tokens": int(args.max_new_tokens),
+        "temperature": float(args.temperature),
+        "top_p": float(args.top_p),
+        "epsilon_pi": float(args.epsilon_pi),
+        "k_consecutive": int(args.k_consecutive),
+        "min_tokens": int(args.min_tokens),
+        "rep_ngram": int(args.rep_ngram),
+        "rep_threshold": float(args.rep_threshold),
+        "max_interventions": int(args.max_interventions),
+        "keep_ratio": float(args.keep_ratio),
+        "treat_budget_as_collapse": int(args.treat_budget_as_collapse),
+    }
+
+    # state
+    collapse_run = 0
+    collapse_reason = "NONE"
+
+    collapse_core = 0
+    collapse_core_reason = "NONE"
+
+    stop_aux = 0
+    stop_aux_reason = "NONE"
+
+    budget_exhausted = 0
+    n_interventions = 0
+    extra_tokens_due_to_intervention = 0
+
+    pi_streak = 0
+    rep_streak = 0
+
+    # generation loop: we do "segments" rather than token-by-token
+    # we accumulate text; check PI/REP on growing output; intervene if needed
+    generated = ""
+    # max_segments caps how many monitored segments we run.
+    # With k_consecutive=3, fixed 32 implies a hard ceiling of floor(32/3)=10 interventions.
+    # Make it configurable / auto.
+    base_segments = max(32, int((args.max_new_tokens + segment_max_new_tokens - 1) // segment_max_new_tokens) + 4)
+    auto_segments = max(base_segments, args.max_interventions * args.k_consecutive + 2)
+    max_segments = args.max_segments if (getattr(args, "max_segments", 0) and args.max_segments > 0) else auto_segments
+    last_ollama_meta = {}
+
+    f = outp.open("w", encoding="utf-8")
+    try:
+        # HARD GUARANTEE: write meta first
+        f.write(json.dumps(meta, ensure_ascii=False) + "\n")
+        f.flush()
+
+        for seg in range(max_segments):
+            # generate next chunk
+            chunk, last_ollama_meta = ollama_generate(
+                model=args.ollama_model,
+                prompt=user_input + "\n\n" + generated,
+                temperature=args.temperature,
+                top_p=args.top_p,
+                max_new_tokens=max(32, args.max_new_tokens // 8),
+                seed=args.seed + seg,  # deterministic-ish
+                host=args.ollama_host
+            )
+            if not chunk:
+                # empty response treated as too short (aux stop)
+                stop_aux = 1
+                stop_aux_reason = "TOO_SHORT"
+                collapse_run = 1
+                collapse_reason = "TOO_SHORT"
+                break
+
+            generated += chunk
+
+            # proxy token count: use whitespace tokens
+            tok_count = len(re.findall(r"\S+", generated))
+            chunk_tokens = len(re.findall(r"\S+", chunk))
+
+            # compute signals
+            pi_raw = pi_raw_proxy(generated)
+            pi_n = pi_norm(pi_raw, q50, q95)
+            rep = repetition_score(generated, n=args.rep_ngram)
+
+            pi_flag = 1 if (pi_n > args.epsilon_pi) else 0
+            rep_flag = 1 if (rep > args.rep_threshold) else 0
+
+            step_rec = {
+                "record_type": "step",
+                "exp_id": args.exp_id,
+                "seed": args.seed,
+                "mode": args.mode,
+                "pillar": args.pillar,
+                "step_idx": seg,
+                "n_tokens_total": tok_count,
+                "gen_tokens_step": chunk_tokens,
+                "pi_raw": float(pi_raw),
+                "pi_norm": float(pi_n),
+                "pi_flag": int(pi_flag),
+                "rep_score": float(rep),
+                "rep_flag": int(rep_flag),
+                "collapse_flag": int(pi_flag or rep_flag),
+                "too_short_flag": int(tok_count < int(args.min_tokens)),
+            }
+            f.write(json.dumps(step_rec, ensure_ascii=False) + "\n")
+            f.flush()
+
+            if pi_flag:
+                pi_streak += 1
+            else:
+                pi_streak = 0
+            if rep_flag:
+                rep_streak += 1
+            else:
+                rep_streak = 0
+
+            # STOP: enough length and no sustained collapse => finish early
+            if tok_count >= args.max_new_tokens:
+                break
+
+            # baseline: declare collapse when sustained
+            sustained = (pi_streak >= args.k_consecutive) or (rep_streak >= args.k_consecutive)
+            if args.mode == "baseline":
+                if sustained:
+                    collapse_run = 1
+                    collapse_reason = "PI" if (pi_streak >= args.k_consecutive) else "REP"
+                    collapse_core = 1
+                    collapse_core_reason = collapse_reason
+                    break
+                # too short not decided until final
+                continue
+
+            # controlled: intervene on sustained
+            if args.mode == "controlled" and sustained:
+                if n_interventions >= args.max_interventions:
+                    budget_exhausted = 1
+                    stop_aux = 1
+                    stop_aux_reason = "BUDGET_EXHAUSTED"
+                    if int(args.treat_budget_as_collapse) == 1:
+                        collapse_run = 1
+                        collapse_reason = "BUDGET_EXCEEDED"
+                    break
+
+                # intervention: keep only part of context, reset streaks, continue
+                n_interventions += 1
+                extra_tokens_due_to_intervention += max(0, len(re.findall(r"\S+", chunk)))
+                generated = truncate_context(generated, args.keep_ratio)
+
+                pi_streak = 0
+                rep_streak = 0
+                continue
+
+        # HARD GUARANTEE: TOO_SHORT is collapse in ALL modes (legacy compat)
+        total_len = len(re.findall(r"\S+", generated))
+        too_short_flag = int(total_len < int(args.min_tokens))
+        if too_short_flag:
+            collapse_run = 1
+            collapse_reason = "TOO_SHORT"
+            stop_aux = 1
+            stop_aux_reason = "TOO_SHORT"
+            # core remains PI/REP only
+            collapse_core = 0
+            collapse_core_reason = "NONE"
+
+        t1 = time.time()
+
+        final = {
+            "record_type": "final",
+            "timestamp_end": utc_now_iso_z(),
+            "runtime_sec": float(t1 - t0),
+
+            "exp_id": str(args.exp_id),
+            "seed": int(args.seed),
+            "mode": str(args.mode),
+            "pillar": str(args.pillar),
+
+            # legacy fields
+            "collapse_run": int(collapse_run),
+            "collapse_reason": str(collapse_reason),
+            "core_collapse_run": int(collapse_core),            # compat
+            "core_collapse_reason": str(collapse_core_reason),  # compat
+            "budget_exhausted": int(budget_exhausted),
+            "n_interventions": int(n_interventions),
+            "n_tokens_total": int(total_len),
+            "extra_tokens_due_to_intervention": int(extra_tokens_due_to_intervention),
+            "tokens_checked_for_tooshort": int(total_len),
+            "too_short_flag": int(too_short_flag),
+            "min_tokens": int(args.min_tokens),
+            "finish_reason": str(last_ollama_meta.get("done_reason", "")),
+            "stop_reason_raw": last_ollama_meta,
+
+            # new taxonomy
+            "collapse_core": int(collapse_core),
+            "collapse_core_reason": str(collapse_core_reason),
+            "stop_aux": int(stop_aux),
+            "stop_aux_reason": str(stop_aux_reason),
+        }
+
+        # append final
+        f.write(json.dumps(final, ensure_ascii=False) + "\n")
+        f.flush()
+    finally:
+        try:
+            f.close()
+        except Exception:
+            pass
+
+    print(f"[run_vnext_ollama_v1] wrote: {outp} mode={args.mode} "
+          f"collapse_run={collapse_run} reason={collapse_reason} "
+          f"core={collapse_core} aux={stop_aux_reason} "
+          f"interventions={n_interventions} tokens={total_len}")
+
+if __name__ == "__main__":
+    main()

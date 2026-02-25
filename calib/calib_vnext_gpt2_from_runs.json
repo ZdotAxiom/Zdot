@@ -1,0 +1,9 @@
+{
+  "complexity": {
+    "q50": 0.6398412238663239,
+    "q95": 0.6803989841405442
+  },
+  "calibration_corpus": "from_runs_baseline_seed0-19_all_pillars",
+  "n_samples": 2062,
+  "note": "auto-calib for vNEXT gpt2; rebuild later with independent corpus"
+}

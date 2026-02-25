@@ -1,0 +1,80 @@
+Given an answer, state the underlying strategy in one sentence, then list 3 alternative strategies.
+
+Identify 3 possible failure modes (hidden assumption, edge case, overconfidence) and propose a minimal fix for each.
+
+Write a self-critique: list 5 weaknesses (most severe first), then revise the answer once.
+
+Estimate uncertainty: label each key claim {high/medium/low} and justify each label.
+
+Generate 3 counterexamples that could break the logic; explain whether each is fatal or partial.
+
+Compress then expand: 2-sentence summary, then a step-by-step rigorous version.
+
+Extract implicit assumptions (at least 5) and propose a test for each.
+
+Create a verification plan: 5 concrete checks to validate correctness.
+
+Rewrite the answer in a “spec style”: requirements, constraints, and success criteria.
+
+Rewrite the answer as pseudocode with clear inputs/outputs and error handling.
+
+Given a long explanation, produce a 6-line “executive summary” without losing key claims.
+
+Create a rubric to grade the answer (5 criteria with 0–2 points each), then self-grade it.
+
+Perform a bias check: list 4 potential biases and rewrite to reduce them.
+
+Create an adversarial reviewer comment (3 bullets) and write an author rebuttal (3 bullets).
+
+Identify the single most fragile step in the reasoning and propose 2 ways to strengthen it.
+
+Rewrite the answer to be shorter by 40% while preserving all claims.
+
+Rewrite the answer to be more explicit: add missing intermediate steps and definitions.
+
+Translate the answer into a JSON schema (keys + example values).
+
+Turn the answer into a checklist that someone could follow without interpretation.
+
+Given the answer, propose a small ablation study: what to remove and what to measure.
+
+Identify which parts are “model-dependent” vs “general reasoning” and label them.
+
+Write two versions: one for a beginner, one for an expert. Keep both concise.
+
+Propose a minimal reproducible example (MRE) that demonstrates the core phenomenon.
+
+Explain what evidence would falsify the answer; list 4 falsifiers.
+
+Create a calibration plan: how to choose thresholds without overfitting.
+
+Given multiple metrics, propose how to aggregate them into a single score (with weights).
+
+Write a one-paragraph methods section describing the procedure precisely.
+
+Convert the reasoning into a table: Step | Input | Output | Risk | Mitigation.
+
+Identify ambiguous terms and propose precise definitions; show impact on conclusions.
+
+Propose a logging schema: what to log per step and why.
+
+Write a stop rule: when to stop iterating and accept the current result.
+
+Given a failure, write a structured postmortem: timeline, root cause, fixes.
+
+Propose an incremental rollout plan with guardrails and rollback criteria.
+
+Create a “QA checklist” for the experiment pipeline and analysis scripts.
+
+Explain the difference between correlation and causation in this setup, with a concrete example.
+
+Propose how to report limitations honestly without weakening the contribution.
+
+Write a short related-work positioning statement (3 sentences, non-pretentious).
+
+Create a figure caption that would help a reviewer understand a complex plot.
+
+Design a small sanity test suite (5 tests) to catch obvious errors quickly.
+
+Write a final answer in exactly 3 bullets: claim, evidence, next step.
+

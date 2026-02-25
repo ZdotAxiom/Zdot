@@ -1,0 +1,7 @@
+exp_id,mode,pillar,seed,model_id,prompt_id,collapse_run,intervene_bin,n_tokens_total,n_interventions,intervene_density,H_pre,runtime_sec,extra_tokens_due_to_intervention
+vSAVE-1.1,baseline,ETH,0,gpt2,0,0,0,587,0,0.0,NONE,60.381611824035645,0.0
+vSAVE-1.1,baseline,ETH,1,gpt2,1,0,0,519,0,0.0,NONE,50.27199101448059,0.0
+vSAVE-1.1,baseline,ETH,2,gpt2,2,0,0,427,0,0.0,NONE,36.48517990112305,0.0
+vSAVE-1.1,controlled,ETH,0,gpt2,0,0,0,587,0,0.0,NONE,62.549288749694824,0.0
+vSAVE-1.1,controlled,ETH,1,gpt2,1,0,0,519,0,0.0,NONE,52.782514810562134,0.0
+vSAVE-1.1,controlled,ETH,2,gpt2,2,0,0,427,0,0.0,NONE,37.73765516281128,0.0

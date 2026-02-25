@@ -1,0 +1,7 @@
+{
+  "q50": 0.5422033807733607,
+  "q95": 0.7608939082901987,
+  "n_samples": 300,
+  "calibration_corpus": "calib/calibration_corpus_v2_ollama_gemma7b_sensitive.txt",
+  "note": "Ollama runner compat: top-level q50/q95 copied from calib.json['complexity'] | gemma:7b ollama v1 (separated names to avoid collisions) | gemma:7b sensitive calib | n=600 | temp=0.9 top_p=0.95 num_predict=128 | seed=0"
+}

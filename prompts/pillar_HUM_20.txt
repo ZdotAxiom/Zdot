@@ -1,0 +1,39 @@
+You are given a short philosophical claim. Do three things: (1) define key terms, (2) list 2 strong objections, (3) revise the claim to survive those objections. Keep it under 180 words.
+
+You are given a paragraph of writing. Rewrite it in a clearer style while preserving meaning, then explain in 3 bullets what changed and why.
+
+Analyze the following ethical dilemma using two frameworks (e.g., deontology vs consequentialism). Conclude with a decision rule that would generalize beyond this case.
+
+Given an argument, extract premises and conclusion, label hidden assumptions, and rate validity (0–10) with a one-sentence justification.
+
+Summarize the text in exactly 5 sentences. Then provide 3 alternative summaries: one neutral, one skeptical, one charitable.
+
+Interpret this metaphor in two incompatible ways. For each interpretation, give one supporting quote or phrase from the text.
+
+Given a concept, produce a minimal formal definition, then give 3 borderline cases that test the definition’s limits.
+
+You are asked to debate yourself: write the strongest pro and strongest con positions (each 120–150 words) and then a synthesis (60–80 words).
+
+Perform a bias audit: identify 3 possible biases in the text (cultural, temporal, ideological) and rewrite one sentence to reduce each bias.
+
+Translate the following Japanese passage into English twice: (1) literal and (2) natural. Then list 5 key vocabulary items with nuance notes.
+
+Create a timeline of the author’s reasoning: Step 1 → Step 6. Each step must be one sentence and must not repeat phrasing.
+
+Extract the core thesis, then generate 3 testable predictions that would follow if the thesis were true.
+
+Identify ambiguity: list 5 phrases that could be interpreted multiple ways, and propose a disambiguated rewrite for each.
+
+You must critique the writing as an editor: point out 5 concrete improvements (structure, clarity, evidence, tone) and show a revised version of one paragraph.
+
+Compare two concepts by building a 2×2 matrix (axes must be meaningful). Fill each quadrant with a concise description and one example.
+
+Given a rhetorical passage, classify 6 sentences by function (claim, evidence, analogy, framing, concession, conclusion). Output as a labeled list.
+
+Write a short argument (≤200 words) that includes exactly: 2 premises, 1 counterexample, and 1 revised conclusion. Make the structure explicit.
+
+Explain the same idea for three audiences: (1) a child, (2) a university student, (3) a domain expert. Each explanation ≤80 words.
+
+Generate 10 Socratic questions that would pressure-test the author’s main claim. Questions must escalate in difficulty.
+
+You are given a claim about society. Provide: (1) strongest supporting evidence you can imagine, (2) strongest rebuttal, (3) what data would decide between them.

@@ -1,0 +1,9 @@
+pillar,mode,NONE,REP,TOO_SHORT
+ETH,baseline,495,5,0
+ETH,controlled,500,0,0
+HUM,baseline,429,71,0
+HUM,controlled,500,0,0
+STEM,baseline,349,149,2
+STEM,controlled,498,0,2
+TEMP,baseline,485,15,0
+TEMP,controlled,500,0,0
